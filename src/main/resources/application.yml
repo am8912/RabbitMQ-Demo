@@ -1,0 +1,22 @@
+spring:
+  output:
+    ansi:
+      enabled: always	
+  application:
+    name: rabbitmq-lab
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        acknowledge-mode: auto      # 自動 ack（示範用；實務可用 MANUAL）
+        prefetch: 1                 # 公平派發：處理完再拿下一筆
+        concurrency: 1              # 預設併發（個案會在 @RabbitListener 覆寫）
+        default-requeue-rejected: false
+
+logging:
+  level:
+    root: INFO
+    org.springframework.amqp: INFO
